@@ -2,7 +2,7 @@ require 'nokogiri'
 require 'open-uri'
 require 'rubygems'
 
-$principal_adress="http://annuaire-des-mairies.com"
+$principal_adress = "http://annuaire-des-mairies.com"
 
 def scrapper
    return doc = Nokogiri::HTML(URI.open('http://annuaire-des-mairies.com/val-d-oise.html'))
@@ -23,9 +23,9 @@ def fusiontab(tab1,tab2)
 end
 
 def mairie(page)
-    array_of_mail=[]
-    array_of_link=[]
-    array_of_name=[]
+    array_of_mail = []
+    array_of_link = []
+    array_of_name = []
 
     links = page.xpath('//tr//td//p[1]//a')
     
@@ -41,8 +41,8 @@ def mairie(page)
     #j'enléve l'adresse qui n'a rien à faire là
     array_of_link.delete("plan-du-site.html")
     #j'enléve tout les . devant l'adresse pour l'åépurer
-    for i in 0..array_of_link.length-1
-        array_of_link[i][0]=array_of_link[i][0].delete(".")
+    for i in 0..array_of_link.length - 1
+        array_of_link[i][0] = array_of_link[i][0].delete(".")
     end
     get_mail(array_of_mail,array_of_link)
     hash = fusiontab(array_of_name,array_of_mail)
